@@ -1,0 +1,278 @@
+create table companhia_danca(
+id int primary key,
+diretor varchar,
+cidade varchar,
+nome varchar
+);
+insert into companhia_danca
+(id, diretor, cidade, nome)
+values
+(1, 'Martha', 'Blumenau', 'DancaCia'),
+(2, 'Joana', 'Sao Paulo', 'Corpus Group'),
+(3, 'Bernadete', 'Itajai', 'Oficina da Danca'),
+(4, 'Nicolau', 'Brusque', 'Magic Shoes');
+
+
+
+
+
+create table Categorias(
+id serial primary key,
+estilo varchar,
+faixa_etaria varchar
+);
+insert into Categorias
+(id,estilo,faixa_etaria)
+values
+(1,'Jazz Adoslecente','12 a 17'),
+(2,'Balé  Adoslecente','12 a 17'),
+(3,'Hip Hop  Adoslecente','12 a 17'),
+(4,'Contemporânea  Adoslecente','12 a 17'),
+(5,'Sapateado  Adoslecente','12 a 17'),
+(6,'Tango  Adoslecente','12 a 17'),
+(7,'Jazz Adulto','18 a 45'),
+(8,'Balé Adulto','18 a 45'),
+(9,'Hip Hop Adulto','18 a 45'),
+(10,'Contemporânea Adulto','18 a 45'),
+(12,'Sapateado Adulto','18 a 45'),
+(13,Tango Adulto,18 a 45);
+
+
+
+
+
+
+create table equipes(
+id int primary key,
+id_categoria int,
+id_companhia int,
+professor varchar,
+num_participantes int,
+foreign key (id_categoria) references categoria (id),
+foreign key (id_companhia) references companhia_danca(id)
+);
+insert into equipes
+(id, id_categoria, id_companhia, professor, num_participantes)
+values
+insert into equipes
+(id, id_categoria, id_companhia, professor, num_participantes)
+values
+(1, 5, 1, 'Maggie', 4),
+(2, 2, 1, 'Margaret', 4),
+(3, 1, 1, 'Robson', 3),
+(4, 10, 1, 'Julie', 3),
+(5, 8, 2, 'João', 4),
+(6, 7, 2, 'Liza', 3),
+(7, 6, 2, 'Mia', 4),
+(8, 9, 3, 'Lucas', 4),
+(9, 3, 3, 'Lucy', 4),
+(10, 7, 3, 'Britany', 3),
+(11, 4, 3, 'Lexi', 4),
+(12, 5, 4, 'Kelly', 3),
+(13, 13, 4, 'Margerine', 4),
+(14, 12, 4, 'Lia', 3);
+
+
+
+
+
+
+
+create table participa(
+	id_categoria int,
+	id_equipe int,
+	foreign key (id_categoria) references categorias, 
+	foreign key (id_equipe) references equipes
+); 
+
+
+
+
+
+
+
+create table apresentacao(
+	id int primary key,
+	tema varchar,
+	horario varchar,
+	Data date,
+	musica varchar,
+	id_equipe int,
+	foreign key (id_equipe) references equipes
+);
+IMPORTANDO TABELA APRESENTAÇÃO: 
+\copy apresentacao from ‘C:\Users\emanuelle_tomczyk\Documents\apresentacao.csv’ delimiter ',' csv header;
+
+INFORMAÇÕES:
+id,tema,horario,data,musica,equipe
+1,Noite Estrelada,17:00:00,2022-02-01,Talking to the moon,1
+2,Celestial,17:30:00,2022-02-01,Isn't She Lovely,2
+3,Rock,18:00:00,2022-02-01,so what,3
+4,Monocromático,18:30:00,2022-02-01,Lovely,4
+5,Trovoada,19:00:00,2022-02-01,Gayaneh-Suite: Sabre dance,5
+6,Praia,19:30:00,2022-02-01,Don’t Know Why,6
+7,Vermelho,20:00:00,2022-02-01,Mi Buenos Aires Querido,7
+8,Hip Hop,17:00:00,2022-02-02,The Breaks,8
+9,Hip Hop,17:30:00,2022-02-02,Ego Trippin,9
+10,Floresta,18:00:00,2022-02-02,Strange Fruit,10
+11,Sia,18:30:00,2022-02-02,Chandelier,11
+12,Las vegas,19:00:00,2022-02-02,24K Magic,12
+13,Azul,19:30:00,2022-02-02,Cambalache,13
+14,Lobos,20:00:00,2022-02-02,Runaway baby,14
+;
+
+
+
+
+
+create table jurados(
+	id int primary key,
+	nome varchar,
+	especialidade varchar,
+	formacao varchar,
+	idade int
+  );
+  
+  IMPORTANDO TABELA JURADOS:
+\copy jurados from ‘C:\Users\emanuelle_tomczyk\Documents\jurados.csv’ delimiter ',' csv header;
+
+INFORMAÇÕES:
+id,nome,especialidade,formacao,idade
+1,José Saraiva,Jazz,Música,54
+2,Maria Steffens,Balé,Dança,28
+3,Davi Grasel,Hip Hop ,Moda,32
+4,Ana Matos,Contemporânea,Artes Cênicas ,25
+5,Gabriel Pizzanelli ,Sapateado ,Artes Plásticas ,41
+6,Júlia Heinz ,Tango ,Dança ,36
+
+
+
+
+
+create table julga(
+	id_jurado int,
+	id_apresentacao int, 
+	foreign key (id_jurado) references jurados,
+	foreign key (id_apresentacao) references apresentacao
+);
+
+
+
+
+
+create table dancarinos(
+	id int primary key,
+	nome varchar,
+	idade int,
+	id_equipe int,
+	foreign key (id_equipe) references equipes
+);
+
+insert into dancarinos
+(id, nome, idade, id_equipe)
+values
+(1, 'Karla', 15, 1),
+(2, 'Roberta', 14, 1),
+(3, 'Katia', 12, 1),
+(4, 'Juliana', 16, 1),
+(5, 'Carla', 17, 2),
+(6, 'Nicolas', 16, 2),
+(7, 'Lara', 16, 2),
+(8, 'Roberta', 15, 2),
+(9, 'Brenda', 12, 3),
+(10, 'Bruna', 15, 3),
+(11, 'Bianca', 13, 3),
+(12, 'Lucia', 20, 4),
+(13, 'Briget', 25, 4),
+(14, 'Mary', 23, 4),
+(15, 'Maureen', 30, 5),
+(16, 'Sue', 26, 5),
+(17, 'Betty', 28, 5),
+(18, 'Jackson', 25, 5),
+(19, 'Charlote', 40, 6),
+(20, 'Henry', 32, 6),
+(21, 'Susy', 35, 6),
+(22, 'Henrietta', 16, 7),
+(23, 'William', 14, 7),
+(24, 'Luzia', 15, 7),
+(25, 'Luiz', 16, 7),
+(26, 'Josias', 23, 8),
+(27, 'Manuela', 25, 8),
+(28, 'Larissa', 24, 8),
+(29, 'Ezequiel', 25, 8),
+(30, 'Eduarda', 14, 9),
+(31, 'Nathan', 16, 9),
+(32, 'David', 12, 9),
+(33, 'Sam', 15, 9),
+(34, 'Luzimel', 34, 10),
+(35, 'Luara', 34, 10),
+(36, 'Luana', 32, 10),
+(37, 'Ana', 16, 11),
+(38, 'Sofia', 17, 11),
+(39, 'Cesar', 17, 11),
+(40, 'Joana', 16, 11),
+(41, 'Roberta', 12, 12),
+(42, 'Luiza', 13, 12),
+(43, 'Isabella', 12, 12),
+(44, 'Daniel', 26, 13),
+(45, 'Lais', 29, 13),
+(46, 'Samantha', 24, 13),
+(47, 'Joel', 25, 13),
+(48, 'Bruno', 45, 14),
+(49, 'Samuel', 41, 14),
+(50, 'Juca', 29, 14);
+
+
+
+
+
+create table funcionarios (
+	pis varchar primary key,
+	nome varchar,
+	função varchar
+);
+
+insert into funcionarios
+( pis, nome, função)
+values
+( '33.55555.22-1', 'Carlos', 'coreografo'),
+('55.55555.22-8', 'Julia', 'maître de ballet'),
+('11.59385.15-6', 'Carol', 'figurinista'),
+('15.2765.62-5', 'madison', 'maquiadora'),
+('12.93574.26-4', 'Alberto', 'diretor'),
+('36.15243.10-3', 'Luiz', 'Tecnico de iluminação'),
+('42.21964.52-1', 'Diego', 'Dj');
+
+
+
+
+
+create table espectador (
+	num_cadeira varchar primary key,
+	valor_ingresso decimal (7,2),
+	nome_cliente varchar,
+	id_func varchar,
+	foreign key (id_func) references funcionarios
+);
+
+insert into espectador
+(num_cadeira, valor_ingresso, nome_cliente, id_func)
+values
+('A12', 180.00, 'Carla', '33.55555.22-1'),
+('B15', 150.00, 'Lucas', '55.55555.22-8'),
+('D13', 60.50, 'Roberta', '11.59385.15-6'),
+('E4', 180.00, 'Wagner', '15.2765.62-5'),
+('F14', 120.00, 'Larissa', '12.93574.26-4'),
+('G24', 180.00, 'Kloe', '36.15243.10-3'),
+('I10', 120.00, 'João', '42.21964.52-1'),
+('H17', 120.00, 'Robson', '55.55555.22-8')
+
+
+
+
+create table assiste(
+	id_apresentacao int, 
+	id_espectador varchar,
+	foreign key (id_apresentacao) references apresentacao,
+	foreign key (id_espectador) references espectador
+);
