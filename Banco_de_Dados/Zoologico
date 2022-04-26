@@ -1,0 +1,153 @@
+create table fornecedor(
+	cnpj varchar primary key,
+	nome varchar,
+	produto varchar,
+	local varchar,
+	email varchar
+);
+insert into fornecedor
+(nome,cnpj,produto,local,email)
+values
+('22.333.333/0001-22','CatPop','ração felinos','Curitiba-PR','agro@gmail.com'),
+('11.222.343/0001-12','Anaconda','ração de repeteis','São Paulo-SP','anaconda@gmail.com');
+
+select * from fornecedor 
+---------------------------------------------------------------------------------------------------------
+create table estoque(
+	cod serial primary key,
+	produto varchar,
+	marca varchar,
+	preco decimal(7,2),
+	validade date,
+	qnt int,
+	data_compra date,
+	cod_fornecedor varchar,
+	foreign key (cod_fornecedor) references fornecedor(cnpj)
+);
+
+insert into estoque
+(produto, marca, preco, validade, qnt, data_compra, cod_fornecedor)
+values
+('ração cobras','rasteja',400.00,'2022-12-26',80,'2022-02-05','11.222.343/0001-12'),
+('ração tigre','miau',750.00,'2022-10-25',120,'2022-01-03','22.333.333/0001-22');
+
+select * from estoque 
+-------------------------------------------------------------------------------------------------------
+create table animal(
+cod_animal serial primary key,
+	nome varchar,
+	especie varchar,
+	ano_nasc int,
+	setor varchar,
+	vis_veterinario date,
+	peso decimal(10,3),
+	observacao varchar
+	);
+
+insert into animal 
+(nome,especie,ano_nasc,setor,vis_veterinario,peso,observacao)
+values
+('Listrado','Tigre',2014,'Felino','2022-03-05',100.00,'Apresenta um machucado na pata'),
+('Jade','Jararaca',2010,'Réptil Rastejante','2022-02-01',3.00,'Esta com dificuldade para digerir os alimentos');
+
+select * from animal
+--------------------------------------------------------------------------------------------------------------------
+create table alimentam(
+	cod_estoque int,
+	cod_animal int,
+	foreign key (cod_estoque) references estoque,
+	foreign key (cod_animal) references animal
+);
+create table cuidam(
+	cod_animal int,
+	cod_fun varchar,
+	foreign key (cod_fun) references funcionarios,
+	foreign key (cod_animal) references animal
+	);
+--------------------------------------------------------------------------------------------------------------------
+create table funcionarios(
+	pis varchar primary key,
+	nome varchar,
+	carga_horaria int,
+	salario decimal(6,2),
+	cpf varchar,
+	cargo varchar,
+	email varchar
+);
+
+INSERT INTO funcionarios
+(pis, nome,carga_horaria, salario, cpf, cargo, email)
+values
+('33.55555.22-1', 'Andrei',8, 2500, '255.655.582-45','Cuidador', 'andrei20@gmail.com'),
+('55.55555.22-8', 'Jéssica',8, 3500, '562.125.589-30','Veterinaria', 'jessicavet@gmail.com');
+select *from funcionarios
+---------------------------------------------------------------------------------------------------
+create table contas(
+	cod serial primary key,
+	gastos_extras decimal(6,2),
+	bilheteria_total decimal(6,2),
+	estoque_total decimal(6,2),
+	lucro decimal(6,2),
+	func_total decimal(6,2),
+	mes_ano date
+);
+select *from contas
+
+insert into contas
+(gastos_extras, bilheteria_total, estoque_total, lucro, func_total, mes_ano )
+values 
+(600.00, 5000.00, 30, 3000.00, 2, '2022-02-28');
+
+select *from contas
+------------------------------------------------------------------------------------------------------
+
+create table visitantes(
+	cpf varchar primary key,
+	nome varchar,
+	idade int,
+	checkin date
+);
+
+\copy visitantes from 'C:\Users\mariah_matos\Documents\visitantes.csv' delimiter ';' csv header;
+
+
+cpf;nome;idade;checkin
+225.655.222-45;Elza;21;03/01/2022
+333.666.444-88;Luiza;20;02/03/2022
+
+
+select *from visitantes
+
+----------------------------------------------------------------------------------------------------
+create table bilheteria(
+	esta_zoo boolean,
+	num_pulseira int primary key,
+	cod_visitantes varchar,
+	foreign key (cod_visitantes) references visitantes
+);
+
+\copy bilheteria from 'C:\Users\mariah_matos\Documents\bilheteria.csv' delimiter ';' csv header;
+
+esta_zoo;num_pulseira;cod_visitantes
+false;123456;225.655.222-45
+false;654321;333.666.444-88
+
+select *from bilheteria 
+---------------------------------------------------------------------------------------------------
+create table empresas_parceiras(
+	cod int primary key,
+	nome varchar,
+	email varchar,
+	aluguel decimal,
+	funcao varchar
+);
+
+\copy empresas_parceiras from 'C:\Users\mariah_matos\Documents\empresas_parceiras.csv' delimiter ';' csv header;
+
+cod;nome;email;aluguel;funcao
+55555;Mini Kalzone;mini@gmail.com;3000;alimentação 
+66666;Ice sorvetes;ice@gmail.com;2000;alimentação 
+
+
+select *from empresas_parceiras
+---------------------------------------------------------------------------------------------
