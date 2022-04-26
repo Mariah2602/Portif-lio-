@@ -1,0 +1,299 @@
+public class AgentePenal extends Funcionario{
+  
+  public AgentePenal(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco, String cargo, int carga_horaria, boolean bateu_ponto, String pis, float salario, float vale_transporte, float vale_alimentacao){
+    super(nome, cpf, data_nascimento, contato, genero, endereco, cargo, carga_horaria, bateu_ponto, pis, salario, vale_transporte, vale_alimentacao);
+  }
+
+  public boolean vigiar(Pavilhao pavilhao){
+    return true;
+  }
+  
+  public boolean acompanharPresidiario(Presidiario presidiario){
+    return true;
+  }
+
+  public boolean tranferir_presidiario(Presidiario presidiario){
+    return true;
+  }
+
+  public void advertir(Presidiario presidiario, String nome){
+  }
+
+  public void advertir(Visitantes visitantes, String nome){ 
+  }
+
+  public void advertir(Presidiario presidiario, Visitantes visitantes, String nome){
+  }
+
+  public boolean conferir(Presidiario presidiario){
+    return true;
+  }
+
+  public boolean conferir(Pavilhao pavilhao){
+    return true; 
+  }
+
+  public boolean revistar(Presidiario presidiario){
+    return true;
+  }
+
+  public boolean revistar(Visitantes visitantes){
+    return true;
+  }
+}
+
+---------------------------------------------------------------------------------------------
+public class Funcionario extends Pessoa{
+  private String cargo;
+  private int carga_horaria;
+  private boolean bateu_ponto;
+  private String pis;
+  private float salario;
+  private float vale_transporte;
+  private float vale_alimentacao;
+
+  public Funcionario(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco, String cargo, int carga_horaria, boolean bateu_ponto, String pis, float salario, float vale_transporte, float vale_alimentação){
+    super(nome, cpf, data_nascimento, contato, genero, endereco);
+    this.cargo = cargo;
+    this.carga_horaria = carga_horaria;
+    this.bateu_ponto = bateu_ponto;
+    this.pis = pis;
+    this.salario = salario;
+    this.vale_transporte = vale_transporte;
+    this.vale_alimentacao = vale_alimentacao;
+  }
+
+  public boolean bater_ponto(){
+    return true;
+  }
+
+  public boolean aumentar_salario(float salario, String nome){
+    return true;
+  }
+
+  public boolean aumentar_salario(float salario, String nome, int carga_horaria){
+    return true;
+  }
+
+  public boolean receber_salario(){
+    return true;
+  }
+  
+  public boolean recarregar_vale(String pis){
+    return true;
+  }
+
+  public boolean ter_ferias(String pis){
+    return true;
+  }
+
+  public void trabalhar(){
+  }
+
+  public int fazer_hora_extra(){
+    return carga_horaria;
+  }
+
+  public boolean ser_transferido(Pavilhao pavilhao){
+    return true;
+  }
+
+  public void ser_demitido(String nome, String pis, String cargo){
+  }
+
+  public void pedir_demissao(String nome, String pis, String cargo){
+  }
+}
+
+------------------------------------------------------------------------------------------------------------
+import java.util.ArrayList;
+
+public class Pavilhao extends Presidio{
+  private int cela;
+  private int refeitorio; 
+  private int banheiro;
+  private int solitaria; 
+  private ArrayList<Presidiario> presidiario;
+  private ArrayList<Funcionario> funcionario; 
+  private int id;
+  private String tipo; 
+  private int patio;
+  private int biblioteca;
+  private int lavanderia;
+  private int sala_de_aula; 
+  private ArrayList<String> sala_tecnico;
+  private int capela;
+  private ArrayList<String> sala_visita;
+  private boolean loja_conveniencia;
+
+  public Pavilhao(String nome, String local, String contato, float despesa, float orcamento, int lotacao, int cela, int refeitorio, int banheiro, int solitaia, int id, String tipo, int patio, int biblioteca, int lavanderia, int sala_de_aula, int capela, boolean loja_conveniencia){
+    super(nome, local, contato, despesa, orcamento, lotacao);
+    this.cela = cela;
+    this.refeitorio = refeitorio; 
+    this.banheiro = banheiro; 
+    this.solitaria = solitaria;
+    this.id = id;
+    this.tipo = tipo;
+    this.patio = patio;
+    this.biblioteca = biblioteca;
+    this.lavanderia = lavanderia; 
+    this.sala_de_aula = sala_de_aula;
+    this.capela = capela;
+    this.loja_conveniencia = loja_conveniencia;
+  }
+}
+
+---------------------------------------------------------------------------------------------------------------
+public class Pessoa{
+  private String nome;
+  private String cpf; 
+  private String data_nascimento;
+  private String contato;
+  private String genero;
+  private String endereco;
+
+  public Pessoa(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco){
+    this.nome = nome;
+    this.cpf = cpf;
+    this.data_nascimento = data_nascimento;
+    this.contato = contato;
+    this.genero = genero; 
+    this.endereco = endereco;
+  }
+  
+  public void registrar(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco){
+  }
+
+  public boolean verificar_presenca(String nome, String cpf){
+    return true; 
+  }
+}
+
+------------------------------------------------------------------------------------------------------------------
+public class Presidiario extends Pessoa{
+  private int codigo;
+  private String crime;
+  private int num_cela;
+  private String advogado;
+  private int tempo_sentenca;
+  private boolean julgamento;
+  private boolean fianca;
+  private String atividade;
+
+  
+  public Presidiario(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco, int codigo, String crime, int num_cela, String advogado){
+    super(nome, cpf, data_nascimento, contato, genero, endereco);
+    this.codigo = codigo;
+    this.crime = crime;
+    this.num_cela = num_cela;
+    this.advogado = advogado;
+}
+  public void tatuar(String nome){
+  }
+
+  public boolean receber_visita(String nome, String cpf, String contato){
+    return true;
+  }
+
+  public boolean receber_ligacao(String nome, String cpf, String contato, String endereco){
+    return true;
+  }
+
+  public boolean fazer_ligacao(String nome, String cpf, int codigo, String endereco){
+    return true;
+  }
+
+  public void ser_liberado(String nome, String crime){
+  }
+
+  public boolean ser_tranferido(int codigo, Pavilhao pavilhao, Funcionario funcionario){
+    return true; 
+  }
+
+  public void sair_presidio(String nome, String contato, String endereco){
+  }
+
+  public boolean comparecer_julgamento(String nome, String crime, String advogado, Funcionario funcionario){
+    return true;
+  }
+
+  public boolean banho_de_sol(){
+    return true;
+  }
+  
+  public boolean recolher(int codigo){
+    return true;
+  }
+  
+  public boolean ir_para_solitaria(String crime, int codigo, String nome){
+    return true;
+  }
+  
+}
+
+------------------------------------------------------------------------------------------------
+
+import java.util.ArrayList;
+
+public class Presidio{
+  private String nome;
+  private String local;
+  private ArrayList<Pavilhao> pavilhao; 
+  private String contato;
+  private ArrayList<Pessoa> pessoas;
+  private ArrayList<String> estoque;
+  private float despesa;
+  private float orcamento;
+  private ArrayList<String> transporte; 
+  private int lotacao; 
+  private ArrayList<String> sistema_seguranca;
+
+  public Presidio(String nome, String local, String contato, float despesa, float orcamento, int lotacao){
+    this.nome = nome; 
+    this.local = local;
+    this.contato = contato; 
+    this.despesa = despesa;
+    this.orcamento = orcamento; 
+    this.lotacao = lotacao;
+  }
+}
+
+
+------------------------------------------------------------------------------------------------------
+import java.util.ArrayList;
+
+public class Visitantes extends Pessoa{
+  private String data_visita;
+  private int hora_visita;
+  private int min_visita;
+  private int hora_saida;
+  private int min_saida;
+  private ArrayList<String> pertences;
+  private String tipo_visita;
+  private ArrayList<String> presente;
+  private String relacao;
+
+  public Visitantes(String nome, String cpf, String data_nascimento, String contato, String genero, String endereco, String data_visita, int hora_visita, int min_visita, int hora_saida, int min_saida, String tipo_visita, String relacao){
+    super(nome, cpf, data_nascimento, contato, genero, endereco);
+    this.data_visita = data_visita;
+    this.hora_visita = hora_visita;
+    this.min_visita = min_visita;
+    this.hora_saida = hora_saida;
+    this.min_saida = min_saida;
+    this.tipo_visita = tipo_visita;
+    this.relacao = relacao; 
+  }
+  
+  public String revistar(String pertences, String presente){
+    return pertences;
+  }
+  
+  public boolean agendar_visita(String nome, String cpf, String contato, String data_visita, int hora_visita, int hora_saida, String tipo_visita, String relacao){
+    return true;
+  }
+
+  public boolean presentear(ArrayList<String> presente){
+    return true;
+  }
+  
+}
