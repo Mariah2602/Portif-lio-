@@ -2,6 +2,7 @@
 
 <h1> Currículo </h1>
 Mariah Matos
+
 * <b> E-mail:</b> mariahmatos2005@gmail.com
 * <b>Telefone:</b> (48) 99824-2442
 
@@ -26,11 +27,11 @@ Mariah Matos
 
 <h2> Banco de Dados: </h2>
 
-* códigos produzido durante a aula de Banco de Dados utilizando o PgAdmin:
+* Códigos produzido durante a aula de Banco de Dados utilizando o PgAdmin:
 
 <h3> Competição de Dança: </h3>
 
-* Neste projeto nós elaboramos um sistema para uma competição de dança, algo bem completo. Foi feito em uma equipe de 4 pessoas, escolhi ele pois gostei de tema e de fazer ele [Competição de Dança](Banco_de_Dados/Dança)
+* Neste projeto nós elaboramos um sistema para uma competição de dança, algo bem completo. Foi feito em uma equipe de 4 pessoas, escolhi ele pois gostei de tema e de fazer ele: [Competição de Dança](Banco_de_Dados/Dança)
 
 <h2> Modelagem de Sistemas: </h2>
 
